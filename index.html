@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffe4ec">
+    <title>Mi Nikki ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Georgia, "Times New Roman", serif;
+            background: linear-gradient(135deg, #ffe4ec, #f5ddf5, #fff5f7);
+            color: #593747;
+        }
+
+        header {
+            text-align: center;
+            padding: 35px 15px;
+        }
+
+        h1 {
+            color: #c04479;
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-style: italic;
+            color: #a36b85;
+            line-height: 1.7;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .carta {
+            max-width: 850px;
+            margin: 0 auto 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #f3c6d8;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px #c77d991c;
+        }
+
+        .carta h2 {
+            text-align: center;
+            color: #c04479;
+            margin-bottom: 25px;
+        }
+
+        .carta p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .despedida {
+            text-align: center;
+            color: #c04479;
+            font-size: 1.2rem;
+            margin-top: 28px;
+            font-weight: bold;
+        }
+
+        .galeria {
+            max-width: 1100px;
+            margin: 0 auto 45px;
+        }
+
+        .galeria h2 {
+            text-align: center;
+            color: #c04479;
+            margin-bottom: 10px;
+        }
+
+        .descripcion {
+            text-align: center;
+            color: #94677c;
+            margin-bottom: 22px;
+            line-height: 1.7;
+        }
+
+        .imagenes {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(min(220px, 100%), 1fr)
+            );
+            gap: 18px;
+            align-items: start;
+        }
+
+        /* Tarjetas de las fotografías */
+        .imagenes figure {
+            position: relative;
+            isolation: isolate;
+            min-width: 0;
+            margin: 0;
+            padding: 8px;
+            background: #f5e6ed;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px #a34d701c;
+            overflow: hidden;
+        }
+
+        /* Fondo borroso de cada foto */
+        .imagenes figure::before {
+            content: "";
+            position: absolute;
+            inset: -20px;
+            z-index: -1;
+            background-image: var(--foto-fondo, none);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            filter: blur(25px);
+            opacity: 0.85;
+            transform: scale(1.1);
+        }
+
+        /* Las fotos se muestran completas */
+        .imagenes img {
+            display: block;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            object-position: center;
+            border-radius: 10px;
+            background: transparent;
+        }
+
+        .imagenes figcaption {
+            position: relative;
+            z-index: 1;
+            padding: 12px 5px 5px;
+            text-align: center;
+            color: #a34470;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Galería de camperas */
+        .galeria-camperas .imagenes {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .galeria-camperas .imagenes img {
+            max-height: 450px;
+        }
+
+        /* Último ensayo */
+        .galeria-ensayo .imagenes {
+            grid-template-columns: minmax(0, 680px);
+            justify-content: center;
+        }
+
+        .galeria-ensayo .imagenes img {
+            max-height: 600px;
+        }
+
+        /* Foto que queremos mostrar completa */
+        .foto-completa {
+            width: 100%;
+        }
+
+        .foto-completa img {
+            max-height: 500px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: #a36b85;
+        }
+
+        /* Adaptación para celulares */
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+
+            header {
+                padding: 25px 8px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .carta {
+                padding: 22px;
+            }
+
+            .carta p {
+                text-align: left;
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+
+            .imagenes {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .imagenes figure {
+                padding: 5px;
+            }
+
+            .imagenes img {
+                max-height: 400px;
+            }
+
+            .galeria-camperas .imagenes {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .galeria-camperas .imagenes img {
+                max-height: 350px;
+            }
+
+            .galeria-ensayo .imagenes {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .galeria-ensayo .imagenes img {
+                max-height: 500px;
+            }
+
+            .foto-completa img {
+                max-height: 400px;
+            }
+
+            .imagenes figcaption {
+                font-size: 0.85rem;
+            }
+
+            .despedida {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>¡Bienvenida, mi Nikki! ❤️</h1>
+        <p>
+            Un pequeño rincón para guardar nuestros recuerdos
+            y compartir nuestros momentos más especiales.
+        </p>
+    </header>
+
+    <main>
+        <section class="carta">
+            <h2>💌 Para vos, en tus 17</h2>
+
+            <p>
+                Hoy no es un día cualquiera. Hoy es el cumpleaños de la
+                única que sabe estar; de la que, con sus locuras y
+                ocurrencias, hace olvidar los problemas de los demás;
+                de la que, sin saberlo, sana una parte de mí; de la que
+                me hace sentir que no estoy sola; de la que, con sus
+                silencios y sus palabras, acompaña de alguna manera;
+                de la que no se guarda una y pelea por todo; de la que
+                piensa que siempre va a estar sola, pero no se da cuenta
+                de todas las personas que la quieren y la aman.
+            </p>
+
+            <p>
+                Hoy te celebro un año más de vida, otro año más
+                acompañándote en todo momento: en los felices, en los
+                malos y en los que son re difíciles. Y lo más importante:
+                hoy se puede decir que renuevo mi «paciencia» para seguir
+                aguantándote otro año más y para seguir queriéndote mucho
+                más. Si no lo sabías, ya te quiero como a una hermanita.
+            </p>
+
+            <p>
+                Felices 17 a la que todos los días pone a prueba mi
+                paciencia; a la que me permite ser yo misma sin juzgarme;
+                a la que, sin querer, adopté de un ensayo a otro, solo
+                porque empezó a no llevar su agua, sabiendo que yo le iba
+                a dar de la mía; y a la que me aguanta siempre.
+            </p>
+
+            <p>
+                Te quiero mucho. Sabés que siempre voy a estar para vos,
+                en todo momento. Y sabés que siempre podés contarme lo
+                que sea, aunque a veces no sepa qué decirte.
+            </p>
+
+            <p class="despedida">Te quiero muchísimo. ❤️</p>
+        </section>
+
+        <section class="galeria galeria-camperas">
+            <h2>🧥 Nuestras camperas</h2>
+            <p class="descripcion">
+                Un recuerdo que siempre voy a guardar.
+            </p>
+
+            <div class="imagenes">
+                <figure>
+                    <img
+                        src="campera.jpg"
+                        style="--foto-fondo: url('campera.jpg')"
+                        alt="Nuestro recuerdo con la campera"
+                        loading="lazy"
+                    >
+                </figure>
+
+                <figure>
+                    <img
+                        src="campera1.jpg"
+                        style="--foto-fondo: url('campera1.jpg')"
+                        alt="Otro recuerdo con la campera"
+                        loading="lazy"
+                    >
+                </figure>
+            </div>
+
+            <p class="descripcion">
+                Un recuerdo especial del día en que te tuve que prestar
+                una campera mía porque la tuya estaba manchada y, de paso,
+                conociste mi casa. ❤️
+            </p>
+        </section>
+
+        <section class="galeria galeria-ensayo">
+            <h2>🤍 Nuestro último ensayo juntas</h2>
+            <p class="descripcion">
+                Un día que merece quedarse para siempre.
+            </p>
+
+            <div class="imagenes">
+                <figure>
+                    <img
+                        src="el ultimo ensayo.jpg"
+                        style="--foto-fondo: url('el ultimo ensayo.jpg')"
+                        alt="Nuestro último ensayo juntas"
+                        loading="lazy"
+                    >
+                    <figcaption>
+                        Nuestro último ensayo juntas por un tiempo,
+                        pero no el último de nuestras vidas. ❤️
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="galeria">
+            <h2>🫂 La mejor amiga de mi mejor amiga</h2>
+            <p class="descripcion">
+                Porque hay personas que se convierten en familia y
+                recuerdos que nunca olvidamos; personas que nos
+                salvan de todo.
+            </p>
+
+            <div class="imagenes">
+                <figure class="foto-completa">
+                    <img
+                        src="foto con tu mejor amiga.jpg"
+                        style="--foto-fondo: url('foto con tu mejor amiga.jpg')"
+                        alt="Mi mejor amiga junto a la moto"
+                        loading="lazy"
+                    >
+                    <figcaption>Mi persona especial 💗</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="galeria">
+            <h2>📸 Momentos aleatorios</h2>
+            <p class="descripcion">
+                Fotos sin explicación, pero en las que salís hermosa.
+            </p>
+
+            <div class="imagenes">
+                <figure>
+                    <img src="aleatorias.jpg"
+                         style="--foto-fondo: url('aleatorias.jpg')"
+                         alt="Un momento aleatorio juntas" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="aleatorias1.jpg"
+                         style="--foto-fondo: url('aleatorias1.jpg')"
+                         alt="Otro momento aleatorio juntas" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="aleatorias2.jpg"
+                         style="--foto-fondo: url('aleatorias2.jpg')"
+                         alt="Otro recuerdo juntas" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="aleatorias3.jpg"
+                         style="--foto-fondo: url('aleatorias3.jpg')"
+                         alt="Otro momento compartido" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="aleatorias4.jpg"
+                         style="--foto-fondo: url('aleatorias4.jpg')"
+                         alt="Otro recuerdo especial" loading="lazy">
+                </figure>
+            </div>
+        </section>
+
+        <section class="galeria">
+            <h2>✨ Nuestro último acto juntas</h2>
+            <p class="descripcion">
+                Un par de fotos tuyas del último acto que compartimos.
+            </p>
+
+            <div class="imagenes">
+                <figure>
+                    <img src="segundo y ultimo acto juntas.jpg"
+                         style="--foto-fondo: url('segundo y ultimo acto juntas.jpg')"
+                         alt="Nuestro último acto juntas" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="segundo y ultimo acto juntas1.jpg"
+                         style="--foto-fondo: url('segundo y ultimo acto juntas1.jpg')"
+                         alt="Otro recuerdo de nuestro último acto" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="segundo y ultimo acto juntas2.jpg"
+                         style="--foto-fondo: url('segundo y ultimo acto juntas2.jpg')"
+                         alt="Otro momento de nuestro último acto" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="segundo y ultimo acto juntas3.jpg"
+                         style="--foto-fondo: url('segundo y ultimo acto juntas3.jpg')"
+                         alt="Otro recuerdo del acto juntas" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="segundo y ultimo acto juntas4.jpg"
+                         style="--foto-fondo: url('segundo y ultimo acto juntas4.jpg')"
+                         alt="Un momento compartido durante el acto" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="segundo y ultimo acto juntas5.jpg"
+                         style="--foto-fondo: url('segundo y ultimo acto juntas5.jpg')"
+                         alt="Una foto de nuestro acto" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="segundo y ultimo acto juntas6.jpg"
+                         style="--foto-fondo: url('segundo y ultimo acto juntas6.jpg')"
+                         alt="Otro recuerdo juntas" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="segundo y ultimo acto juntas7.jpg"
+                         style="--foto-fondo: url('segundo y ultimo acto juntas7.jpg')"
+                         alt="Un recuerdo especial del acto" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="segundo y ultimo acto juntas8.jpg"
+                         style="--foto-fondo: url('segundo y ultimo acto juntas8.jpg')"
+                         alt="Otro momento especial juntas" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="segundo y ultimo acto juntas9.jpg"
+                         style="--foto-fondo: url('segundo y ultimo acto juntas9.jpg')"
+                         alt="Otra foto de nuestro último acto" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="segundo y ultimo acto juntas10.jpg"
+                         style="--foto-fondo: url('segundo y ultimo acto juntas10.jpg')"
+                         alt="Un recuerdo más de nuestro acto" loading="lazy">
+                </figure>
+
+                <figure>
+                    <img src="segundo y ultimo acto juntas11.jpg"
+                         style="--foto-fondo: url('segundo y ultimo acto juntas11.jpg')"
+                         alt="Nuestro recuerdo final del acto" loading="lazy">
+                </figure>
+            </div>
+        </section>
+    </main>
+
+    <footer>Hecho con mucho cariño para vos, Valen. ♡</footer>
+</body>
+</html>
